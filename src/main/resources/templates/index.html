@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Książki</title>
+</head>
+<body>
+<table xmlns:th="http://www.w3.org/1999/xhtml">
+    <thead>
+    <tr>
+        <th> Tytuł</th>
+        <th> Autor</th>
+        <th> Rok wydania</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${books.empty}">
+        <td colspan="2"> Brak książek</td>
+    </tr>
+
+    <tr th:each="book : ${books}">
+        <td><span th:text="${book.title}"> Title </span></td>
+        <td><span th:text="${book.authors}"> Author </span></td>
+        <td><span th:text="${book.year}"> Year </span></td>
+        <td>
+            <form action="#" th:action="@{/books/{id}(id=${book.id})}" th:method="get">
+                <input type="submit" value="Details" name="Details">
+            </form>
+        </td>
+        <td>
+            <form action="#" th:action="@{/books/{id}(id=${book.id})}" th:method="delete">
+                <input type="submit" value="Delete" name="Delete">
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<form  action="#" th:action="@{/books/newbook}" th:method="get">
+    <input type="submit" value="Add book" name="Add book">
+</form>
+</body>
+</html>
